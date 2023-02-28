@@ -1,9 +1,11 @@
 package com.example.papb_lifecycleapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,5 +50,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         Log.d("state", "On Destroy");
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("Kelas", "PAPB-A");
+        Log.d("state", "Save State");
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        Log.d("state","Restore State");
+        String teksKelas = savedInstanceState.getString("Kelas");
+        TextView teksHello = this.findViewById(R.id.teksHello);
+        teksHello.setText(teksKelas);
     }
 }
